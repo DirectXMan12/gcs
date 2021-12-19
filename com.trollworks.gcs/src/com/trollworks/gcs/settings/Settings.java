@@ -115,7 +115,7 @@ public final class Settings extends ChangeableData {
             String localAppData = System.getenv("LOCALAPPDATA");
             path = localAppData != null ? Path.of(localAppData) : Path.of(homeDir, "AppData", "Local");
         } else {
-            path = Path.of(homeDir, ".config");
+            path = Path.of(homeDir, ".config", "GCS");
         }
         return path.resolve("gcs.json").normalize().toAbsolutePath();
     }

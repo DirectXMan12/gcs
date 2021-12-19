@@ -49,11 +49,11 @@ public class Library implements Comparable<Library> {
     private              Release       mAvailableUpgrade;
 
     public static Path getDefaultMasterLibraryPath() {
-        return Path.of(System.getProperty("user.home", "."), "GCS", "Master Library").normalize().toAbsolutePath();
+        return Path.of(System.getProperty("user.home", "."), ".local", "share", "GCS", "Master Library").normalize().toAbsolutePath();
     }
 
     public static Path getDefaultUserLibraryPath() {
-        return Path.of(System.getProperty("user.home", "."), "GCS", "User Library").normalize().toAbsolutePath();
+        return Path.of(System.getProperty("user.home", "."), ".local", "share", "GCS", "User Library").normalize().toAbsolutePath();
     }
 
     public Library(String title, String githubAccountName, String repoName, Path path) {

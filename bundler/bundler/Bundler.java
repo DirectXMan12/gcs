@@ -642,6 +642,8 @@ public final class Bundler {
                 args.add("1");
                 args.add("--linux-package-deps");
                 args.add("");
+                args.add("--type");
+                args.add("deb");
             }
         }
         case WINDOWS -> {
