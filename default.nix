@@ -4,13 +4,13 @@ let
     src = fetchFromGitHub {
 		owner = "directxman12";
 		repo = "gcs";
-		rev = "v4.36.0-custom.0.0";
-        sha256 = "04lc4c4amkaqchgfmq6xxg2n82fhap3njvsknd31v0q7223v0b42";
+		rev = "v4.37.1-custom.0.0";
+        sha256 = "026vi3m52qfvaq1d8m2h4qwh76f7nr1s9y8gghkxi2sdgk42y69z";
     };
 in
 
 stdenv.mkDerivation {
-    name = "gcs-4.36.0-custom.0.0";
+    name = "gcs-4.37.1-custom.0.0";
 
     inherit src;
 
