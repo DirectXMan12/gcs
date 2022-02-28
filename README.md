@@ -1,4 +1,4 @@
-## GURPS Character Sheet
+## GURPS Character Sheet (Nix Derivation)
 
 GURPS Character Sheet (GCS) is a stand-alone, interactive, character sheet
 editor that allows you to build characters for the
@@ -7,49 +7,16 @@ system.
 
 ![Build Status](https://github.com/richardwilkes/gcs/actions/workflows/build.yml/badge.svg?branch=master)
 
-### Building from the command line
+## Changes
 
-**NOTE**: *To build a specific version of GCS, you will need to check out the appropriate release
-tag. These directions are for the latest source, which may have experimental code or changes that
-are incompatible with the current data files. These build instructions may have also changed since
-a given release, so be sure to review them again with the version you plan to build.*
+- Configuration & library files now follow more closely to the XDG folder spec (see [6210acf](https://github.com/DirectXMan12/gcs/commit/6210acf1cf35af9bfa6378ea5c770ea6caf5a5a0)):
+  
+  * Master Library: ~/.local/share/GCS/Master Library 
+  * User Library: ~/.local/share/GCS/User Library
+  * Config: ~/.config/GCS
 
-1. Make sure you have JDK 17 installed and set to be used as your default Java compiler. You can
-   download it for your platform here:
-   http://jdk.java.net/17/
+- Building: build scripts have been modified slightly to build more nicely under Nix.
 
-2. If you are building on Windows, you'll need to install the WiX Toolset from here:
-   https://github.com/wixtoolset/wix3/releases/tag/wix3112rtm
+## Building
 
-3. Clone the source repositories:
-   ```
-   % git clone https://github.com/richardwilkes/gcs
-   ```
-
-4. Build and bundle the code for your platform:
-
-   **macOS**
-
-   ```
-   % cd gcs
-   % ./bundle.sh
-   ```
-
-   **Linux**
-
-   If you get a message similar to "Error: Invalid or unsupported type: [null]" in the
-   application packaging step when trying to run this on Linux, your distribution likely does not
-   have the debian packaging tools installed. You'll either need to install them, or use the
-   `--unpackaged` option when running `bundle.sh`
-   
-   ```
-   % cd gcs
-   % ./bundle.sh
-   ```
-
-   **Windows**
-
-   ```
-   > cd gcs
-   > .\bundle.bat
-   ```
+[default.nix](default.nix) pulls source from this GitHub repository.  May be used as a normal derivation (e.g. `nix-env -i -f default.nix`).
