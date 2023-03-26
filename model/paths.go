@@ -25,7 +25,10 @@ func DefaultRootLibraryPath() string {
 	} else {
 		home = u.HomeDir
 	}
-	return filepath.Join(home, "GCS")
+	// NB(directxman12): this is not techically correct, but the go standard
+	// library doesn't include a useful way to pull in the xdg dirs, so this'll
+	// be good enough
+	return filepath.Join(home, ".local", "share", "GCS")
 }
 
 // DefaultMasterLibraryPath returns the default master library path.
