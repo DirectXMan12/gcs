@@ -14,6 +14,8 @@ package main
 import (
 	"fmt"
 	"path/filepath"
+	"os"
+	"os/user"
 
 	"github.com/richardwilkes/gcs/v5/early"
 	"github.com/richardwilkes/gcs/v5/model"
@@ -25,7 +27,7 @@ import (
 	"github.com/richardwilkes/toolbox/i18n"
 	"github.com/richardwilkes/toolbox/log/jotrotate"
 	"github.com/richardwilkes/toolbox/xio/fs"
-	"github.com/richardwilkes/toolbox/xio/fs/paths"
+	// "github.com/richardwilkes/toolbox/xio/fs/paths"
 	"github.com/richardwilkes/unison"
 )
 
@@ -38,7 +40,15 @@ func main() {
 	cl.UsageTrailer = fmt.Sprintf(i18n.Text(`Translations dir: "%s"`), i18n.Dir)
 
 	settingsName := cmdline.AppCmdName + "_prefs.json"
-	model.SettingsPath = filepath.Join(paths.AppDataDir(), settingsName)
+	// NB(directxman12): whyyyyyy. why is *config* stored in AppDataDir (wildly incorrect according to the XDG spec),
+	// but *app data* (the library) is stored in ~/.GCS?  Anyway, let's fix this in a linux-specific way for now
+	var home string
+	if u, err := user.Current(); err != nil {
+		home = os.Getenv("HOME")
+	} else {
+		home = u.HomeDir
+	}
+	model.SettingsPath = filepath.Join(home, ".config", "GCS", settingsName)
 	// Look for a settings file co-located with the executable and prefer that over the one in the app data dir.
 	if dir, err := toolbox.AppDir(); err == nil {
 		settingsPath := filepath.Join(dir, settingsName)
